@@ -27,10 +27,21 @@ public class User {
 	@JsonProperty
 	private String username;
 	
+	@Column(nullable = false)
+	private String password;
+	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
 	@JsonIgnore
     private Cart cart;
+	
+	public User() {}
+
+	public User(User user) {
+		this.id = user.getId();
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+	}
 	
 	public Cart getCart() {
 		return cart;
@@ -55,7 +66,13 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 }
